@@ -1,0 +1,110 @@
+h1 {
+    font-family : Impact;
+    color : red;
+}
+
+footer {
+    color : red;
+    position : absolute;
+    bottom : 0;
+    width : 100px;
+    text-align : center;
+
+}
+
+/* footer span {
+    color : green;
+} */
+
+.box {
+    background-color : rgb(117, 225, 22);
+    width : 200px;
+    height : 200px;
+    position : relative;
+    border-top-left-radius : 50px;
+    transform : rotate(15deg);
+    animation-name: animateBox;
+    animation-fill-mode : forwards;
+    animation-duration: 4s;
+    animation-timing-function : linear;
+    animation-delay : 2s;
+    animation-iteration-count : infinite;
+    animation-direction : alternate;
+}
+
+@keyframes animateBox {
+    0% {background-color : yellow; left : 0px; top : 0px;}
+    50% {background-color : blue; transform : rotate(50deg); left : 100px; top : 20px;}
+    100% {background-color : crimson; left : 300px; top : 50px;}
+}
+
+.view {
+    width: 200px;
+    height: 200px;
+    perspective: 300px;
+    position: fixed;
+    bottom: 0;
+}
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(30deg) rotateY(30deg) translateX(50px) translateY(50px);
+}
+.face {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: transparent;
+    border: 2px solid red;
+    border-radius: 10px;
+    backface-visibility: visible;
+    text-align: center;
+    line-height: 100px;
+}
+.front { transform: rotateY(0deg) translateZ(50px); }
+.right {transform: rotateY(90deg) translateZ(50px); }
+.back { transform: rotateY(180deg) translateZ(50px); }
+.left { transform: rotateY(-90deg) translateZ(50px); }
+.top { transform: rotateX(90deg) translateZ(50px); }
+.bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+#nike {
+    position: absolute;
+    top: 300px; left: 300px;
+    width: 470px; height: 200px;
+    border: 1px solid gray;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    font-size: 40px;
+    line-height: 300px;
+    text-indent: 350px;
+    z-index: 3;
+}
+
+/* :before :after are reference the layer of the shape or color */
+#nike:before {
+    content: "";
+    position: absolute;
+    top: -250px; left: 190px;
+    width: 150px; height: 550px;
+    background: black;
+    border-top-left-radius: 60px 110px;
+    border-top-right-radius: 130px 220px;
+    transform: rotate(-113deg);
+    z-index: 1;
+}
+
+#nike:after {
+    content: "";
+    position: absolute;
+    top: -235px; left: 220px;
+    width: 120px; height: 500px;
+    background: black;
+    border-top-left-radius: 60px 110px;
+    border-top-right-radius: 130px 220px;
+    background: white;
+    transform: rotate(-104deg);
+    z-index: 2;
+}
