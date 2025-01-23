@@ -12,109 +12,65 @@ footer {
 
 }
 
-.box {
-    background-color : rgb(255, 0, 0);
-    width : 300px;
-    height : 200px;
-    overflow: hidden;
-    position : relative;
-    border-radius : 50px;
-    /* animation-name: animateBox;
-    animation-fill-mode : forwards;
-    animation-duration: 4s;
-    animation-timing-function : linear;
-    animation-delay : 2s;
-    animation-iteration-count : infinite;
-    animation-direction : alternate; */
-}
-
-.triangle {
-    background-color : rgb(0, 255, 30);
-    width : 150px;
-    height :150px;
-    /* overflow: hidden; */
-    position : relative;
-
-}
-
-@keyframes animateBox {
-    0% {background-color : yellow; left : 0px; top : 0px;}
-    50% {background-color : blue; transform : rotate(50deg); left : 100px; top : 20px;}
-    100% {background-color : crimson; left : 300px; top : 50px;}
-}
-
-#nike {
-    position: absolute;
-    top: 300px; left: 300px;
-    width: 470px; height: 200px;
-    overflow: hidden; 
+.youtube {
+    display: flex;
+    align-items: center;
+    position: relative; 
+    gap: 10px;
     font-family: Arial, sans-serif;
-    font-size: 40px;
-    line-height: 300px;
-    text-indent: 350px;
-    z-index: 3;
-}
-
-/* :before :after are reference the layer of the shape or color */
-#nike:before {
-    content: "";
-    position: absolute;
-    top: -250px; left: 190px;
-    width: 150px; height: 550px;
-    background: black;
-    border-top-left-radius: 60px 110px;
-    border-top-right-radius: 130px 220px;
-    transform: rotate(-113deg);
-    z-index: 1;
-}
-
-#nike:after {
-    content: "";
-    position: absolute;
-    top: -235px; left: 220px;
-    width: 120px; height: 500px;
-    background: black;
-    border-top-left-radius: 60px 110px;
-    border-top-right-radius: 130px 220px;
-    background: white;
-    transform: rotate(-104deg);
-    z-index: 2;
-}
-
-/* #nike {
-    position: absolute;
-    top: 300px; left: 300px;
-    width: 470px; height: 200px;
     overflow: hidden; 
-    font-family: Arial, sans-serif;
-    font-size: 40px;
-    line-height: 300px;
-    text-indent: 350px;
-    z-index: 3;
-} */
-
-/* :before :after are reference the layer of the shape or color */
-/* #nike:before {
-    content: "";
-    position: absolute;
-    top: -250px; left: 190px;
-    width: 150px; height: 550px;
-    background: black;
-    border-top-left-radius: 60px 110px;
-    border-top-right-radius: 130px 220px;
-    transform: rotate(-113deg);
-    z-index: 1;
 }
 
-#nike:after {
-    content: "";
+.logo {
+    background-color: red;
+    width: 300px;
+    height: 200px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    animation: shrink-logo 2s ease-in-out forwards;
+}
+
+.play-button {
+    width: 0;
+    height: 0;
+    /* | */
+    border-left: 60px solid white; 
+    /* \ */
+    border-top: 35px solid transparent;
+    /* / */
+    border-bottom: 35px solid transparent;
+    /* |\ */
+    /* |/ */
+}
+
+.text {
+    font-size: 100px;
+    font-weight: bold;
+    color: black;
     position: absolute;
-    top: -235px; left: 220px;
-    width: 120px; height: 500px;
-    background: black;
-    border-top-left-radius: 60px 110px;
-    border-top-right-radius: 130px 220px;
-    background: white;
-    transform: rotate(-104deg);
-    z-index: 2;
-} */
+    left: 120px; /* Starts hidden behind the logo */
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0; /* Hidden at the start */
+    animation: slide-out 2s ease-in-out forwards; /* Animation applied */
+}
+
+/* Animation */
+@keyframes shrink-logo {
+    0% {width: 300px; height: 200px;}
+    100% {width: 200px; height: 140px;}
+}
+
+@keyframes slide-out {
+    0% {left: 90px; /* Text hidden */
+        opacity: 0;
+    }
+    50% {opacity: 1;
+    }
+    100% {left: 220px; /* Slides text */
+          opacity: 1; 
+    }
+}
