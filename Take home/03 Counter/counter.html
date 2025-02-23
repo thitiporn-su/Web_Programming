@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Counter</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; background-color: #f4f4f4; }
+        .container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); display: inline-block; }
+        .counter { font-size: 64px; margin: 20px; font-weight: bold; color: #333; }
+        button { font-size: 18px; margin: 10px; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        .increase { background-color: #28a745; color: white; }
+        .decrease { background-color: #dc3545; color: white; }
+        .reset { background-color: #ffc107; color: white; }
+        .save { background-color: #007bff; color: white; }
+        .log { margin-top: 20px; text-align: left; display: inline-block; max-width: 400px; }
+        ul { list-style-type: none; padding: 0; }
+        li { background: #fff; padding: 10px; margin: 5px 0; border-radius: 5px; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Visitor Counter</h1>
+        <div class="counter" id="count">0</div>
+        <button class="increase" onclick="increase();">+ Up</button>
+        <button class="decrease" onclick="decrease();">- Down</button>
+        <button class="reset" onclick="reset();">Reset</button>
+        <button class="save" onclick="save();">Save</button>
+    </div>
+    
+    <div class="log">
+        <h2>Visitor Log</h2>
+        <ul id="logList"></ul>
+        <h2 id="totalCount">Total Saved Count : 0</h2>
+
+    </div>
+    
+    <script>
+        let count = 0;
+        let totalSum = 0;
+        
+        function updateDisplay() {
+            document.getElementById("count").textContent = count;
+            document.getElementById("totalCount").textContent = `Total Saved Count: ${totalSum}`;
+        }
+        
+        function increase() {
+            count++;
+            updateDisplay();
+        }
+        
+        function decrease() {
+            if (count > 0) count--;
+            updateDisplay();
+        }
+        
+        function reset() {
+            count = 0;
+            totalSum = 0;
+            // clear visitor log history
+            document.getElementById("logList").innerHTML = "";
+            updateDisplay();
+        }
+        
+        function save() {
+            let logList = document.getElementById("logList");
+            let now = new Date().toLocaleString();
+            let entry = document.createElement("li");
+            entry.textContent = `Count: ${count} - Saved on: ${now}`;
+            logList.appendChild(entry);
+
+            totalSum += count;
+            updateDisplay();
+        }
+
+        function sumAll() {
+            alert(`Total Saved Count : ${totalSum}`);
+        }
+
+    </script>
+</body>
+</html>
