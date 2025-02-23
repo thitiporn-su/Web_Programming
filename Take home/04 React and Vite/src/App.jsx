@@ -1,35 +1,61 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './layout.css'
 
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [mancount, setManCount] = useState(0);
+  const [womancount, setWomanCount] = useState(0);
+  const [log, setLog] = useState([]);
+  const [totalSum, setTotalSum] = useState(0);
+
+  const reset = () => {
+    setManCount(0);
+    setWomanCount(0);
+    setLog([]);
+    setTotalSum(0);
+  };
+
+  const save = () => {
+    const now = new Date().toLocaleString();
+    const newEntry = `Man: ${mancount}, Woman: ${womancount} - Saved on: ${now}`;
+    setLog([...log, newEntry]);
+    setTotalSum(totalSum + mancount + womancount);
+  };
+
+  const sumAll = () => {
+    alert(`Total Saved Count: ${totalSum}`);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1>Counter</h1>
+      <div className="counter man">
+        <h2 className='man-text'>Man</h2>
+        <p className='count'>{mancount}</p>
+        <button onClick={() => setManCount((mancount) => mancount + 1)}>UP</button>
+        <button onClick={() => setManCount((mancount) => mancount - 1)}>DOWN</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+
+      <div className="counter woman">
+        <h2 className='woman-text'>Woman</h2>
+        <p className='count'>{womancount}</p>
+        <button onClick={() => setWomanCount((womancount) => womancount + 1)}>UP</button>
+        <button onClick={() => setWomanCount((womancount) => womancount - 1)}>DOWN</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <button onClick={save}>Save</button>
+      <button onClick={reset}>Reset</button>
+      <button onClick={sumAll}>Sum All</button>
+
+      <h2>Visitor Log</h2>
+      <ul>
+        {log.map((entry, index) => (
+          <li key={index}>{entry}</li>
+        ))}
+      </ul>
+
     </>
-  )
+  );
 }
 
-export default App
+export default App;

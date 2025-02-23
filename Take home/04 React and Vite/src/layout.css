@@ -1,42 +1,95 @@
+body {
+  background-color: #121212;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
+  max-width: 600px;
+  margin: 50px auto;
   padding: 2rem;
   text-align: center;
+  background: #1e1e1e;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.counter {
+  background: #2a2a2a;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
-.card {
-  padding: 2em;
+.count {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #fbbc05;
 }
 
-.read-the-docs {
-  color: #888;
+button {
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #e68900;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:nth-of-type(3), button:nth-of-type(4), button:nth-of-type(5) {
+  background: #4caf50;
+}
+
+button:nth-of-type(3):hover,
+button:nth-of-type(4):hover,
+button:nth-of-type(5):hover {
+  background: #43a047;
+}
+
+h2:last-of-type {
+  margin-top: 30px;
+  font-size: 2rem;
+  color: #fbbc05;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  background: #333;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
 }
