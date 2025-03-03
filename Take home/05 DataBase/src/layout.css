@@ -1,0 +1,95 @@
+body {
+  background-color: #121212;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 2rem;
+  text-align: center;
+  background: #1e1e1e;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.counter {
+  background: #2a2a2a;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.count {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #fbbc05;
+}
+
+button {
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #e68900;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:nth-of-type(3), button:nth-of-type(4), button:nth-of-type(5) {
+  background: #4caf50;
+}
+
+button:nth-of-type(3):hover,
+button:nth-of-type(4):hover,
+button:nth-of-type(5):hover {
+  background: #43a047;
+}
+
+h2:last-of-type {
+  margin-top: 30px;
+  font-size: 2rem;
+  color: #fbbc05;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  background: #333;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
