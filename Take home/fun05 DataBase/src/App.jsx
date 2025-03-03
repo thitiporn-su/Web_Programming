@@ -4,21 +4,26 @@ import './index.css';
 function App() {
   const [mancount, setManCount] = useState(0);
   const [womancount, setWomanCount] = useState(0);
-  const [log, setLog] = useState([]);
+  const [log, setLog] = useState([]); 
+  const [dbLogs, setDbLogs] = useState([]); 
   const [totalSum, setTotalSum] = useState(0);
 
-  // Function to reset the counter
   const reset = () => {
     setManCount(0);
     setWomanCount(0);
-    // setLog([]);
-    // setTotalSum(0);
+    setLog([]);
+    setTotalSum(0);
   };
 
-  // Function to save data to MySQL
   const save = async () => {
-    const newEntry = { male_count: mancount, female_count: womancount };
+    const now = new Date().toLocaleString();
+    const newEntry = { male_count: mancount, female_count: womancount, timestamp: now };
 
+    // Save locally 
+    setLog([...log, `Man: ${mancount}, Woman: ${womancount} - Saved on: ${now}`]);
+    setTotalSum(totalSum + mancount + womancount);
+
+    // Save to database
     try {
       const response = await fetch("http://localhost:3001/save", {
         method: "POST",
@@ -27,8 +32,7 @@ function App() {
       });
 
       if (response.ok) {
-        fetchRecords(); // Refresh log list after saving
-        setTotalSum(totalSum + mancount + womancount);
+        fetchRecords(); 
       } else {
         console.error("Failed to save data.");
       }
@@ -37,13 +41,12 @@ function App() {
     }
   };
 
-  // Function to fetch records from MySQL
   const fetchRecords = async () => {
     try {
       const response = await fetch("http://localhost:3001/records");
       const data = await response.json();
 
-      setLog(
+      setDbLogs(
         data.map(
           (entry) =>
             `Man: ${entry.male_count}, Woman: ${entry.female_count} - Saved on: ${entry.timestamp}`
@@ -54,12 +57,10 @@ function App() {
     }
   };
 
-  // Fetch visitor log records when the page loads
   useEffect(() => {
     fetchRecords();
   }, []);
 
-  // Function to show total saved count
   const sumAll = () => {
     alert(`Total Saved Count: ${totalSum}`);
   };
@@ -91,6 +92,7 @@ function App() {
           <li key={index}>{entry}</li>
         ))}
       </ul>
+
     </>
   );
 }

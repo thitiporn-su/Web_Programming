@@ -7,7 +7,7 @@ var app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Connect to MySQL database
+// Connect to MySQL using the "fun05" database
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -31,7 +31,7 @@ con.connect(function (err) {
             timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     `;
-    con.query(createTable, function (err) {
+    con.query(createTable, function (err, result) {
         if (err) {
             console.error("Error creating table:", err);
             throw err;
@@ -40,23 +40,38 @@ con.connect(function (err) {
     });
 });
 
-// API: Save visitor log data
+// API: Save data – insert new record with male and female counts
 app.post("/save", function (req, res) {
     const { male_count, female_count } = req.body;
+
+    if (male_count === undefined || female_count === undefined) {
+        return res.status(400).send({ message: "Invalid data" });
+    }
+
     const sql = "INSERT INTO records (male_count, female_count) VALUES (?, ?)";
     con.query(sql, [male_count, female_count], function (err, result) {
         if (err) {
             console.error("Error saving record:", err);
             return res.status(500).send({ message: "Error saving data" });
         }
-        res.send({ message: "Data saved!" });
+        res.send({ message: "Data saved successfully!" });
     });
 });
 
-// API: Fetch all records
+// API: Fetch records with optional date filtering (expects startDate and endDate as YYYY-MM-DD)
 app.get("/records", function (req, res) {
-    const sql = "SELECT * FROM records ORDER BY timestamp DESC";
-    con.query(sql, function (err, results) {
+    const { startDate, endDate } = req.query;
+    let sql = "SELECT * FROM records";
+    let params = [];
+
+    if (startDate && endDate) {
+        sql += " WHERE timestamp BETWEEN ? AND ?";
+        params = [startDate, endDate];
+    }
+
+    sql += " ORDER BY timestamp DESC";
+
+    con.query(sql, params, function (err, results) {
         if (err) {
             console.error("Error fetching records:", err);
             return res.status(500).send({ message: "Error fetching records" });

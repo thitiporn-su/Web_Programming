@@ -7,3 +7,8 @@ CREATE TABLE IF NOT EXISTS records (
     female_count INT NOT NULL,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+-- mysql -u root -p               
+-- USE fun05;
+-- SELECT * FROM records;
