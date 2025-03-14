@@ -61,24 +61,34 @@ app.post("/save", function (req, res) {
 // API: Fetch records with optional date filtering (expects startDate and endDate as YYYY-MM-DD)
 app.get("/records", function (req, res) {
     const { startDate, endDate } = req.query;
+    console.log("Received dates:", startDate, endDate);
+    
+
     let sql = "SELECT * FROM records";
     let params = [];
 
     if (startDate && endDate) {
-        sql += " WHERE timestamp BETWEEN ? AND ?";
+        sql += " WHERE DATE(timestamp) BETWEEN ? AND ?";
         params = [startDate, endDate];
+    } else if (startDate) {
+        sql += " WHERE DATE(timestamp) >= ?";
+        params = [startDate];
+    } else if (endDate) {
+        sql += " WHERE DATE(timestamp) <= ?";
+        params = [endDate];
     }
 
-    sql += " ORDER BY timestamp DESC";
+    sql += " ORDER BY timestamp DESC"; // Sort latest first
 
     con.query(sql, params, function (err, results) {
         if (err) {
             console.error("Error fetching records:", err);
             return res.status(500).send({ message: "Error fetching records" });
         }
-        res.json(results);
+        res.json(results); // Send the results as JSON
     });
 });
+
 
 // Start the server on Port 3001
 app.listen(3001, function () {

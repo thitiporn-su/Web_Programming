@@ -7,6 +7,8 @@ function App() {
   const [log, setLog] = useState([]); 
   const [dbLogs, setDbLogs] = useState([]); 
   const [totalSum, setTotalSum] = useState(0);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
   const reset = () => {
     setManCount(0);
@@ -43,6 +45,10 @@ function App() {
 
   const fetchRecords = async () => {
     try {
+      const queryParams = new URLSearchParams();
+      if (startDate) queryParams.append("startDate", startDate);
+      if (endDate) queryParams.append("endDate", endDate);
+
       const response = await fetch("http://localhost:3001/records");
       const data = await response.json();
 
@@ -92,6 +98,32 @@ function App() {
           <li key={index}>{entry}</li>
         ))}
       </ul>
+
+      {/* Date Filter UI */}
+      <div className="date-filter">
+        <label>Start Date:</label>
+        <input
+          type="date"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+        />
+
+        <label>End Date:</label>
+        <input
+          type="date"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+        />
+
+        <button onClick={fetchRecords}>Filter</button>
+        <ul>
+        {dbLogs.length > 0 ? (
+          dbLogs.map((entry, index) => <li key={index}>{entry}</li>)
+        ) : (
+          <li>No records found</li>
+        )}
+        </ul>
+      </div>
 
     </>
   );
